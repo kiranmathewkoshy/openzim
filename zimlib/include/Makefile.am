@@ -24,6 +24,7 @@ nobase_include_HEADERS = \
 	zim/zintstream.h \
 	zim/writer/articlesource.h \
 	zim/writer/dirent.h \
+	zim/writer/zimdiff.h \
 	zim/writer/zimcreator.h
 
 noinst_HEADERS = \
