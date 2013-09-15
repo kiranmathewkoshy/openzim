@@ -164,7 +164,6 @@ const zim::writer::Article* zimDiff::ArticleSource::getNextArticle()
     //loop till an article read to be added is found.
     bool found=false;
     bool redirect=false;
-    uint16_t mime=0;
     while(itr!=file_2.end())        //While not reaching EOF
     {
         //irt is the file pointer in file_2
@@ -173,7 +172,6 @@ const zim::writer::Article* zimDiff::ArticleSource::getNextArticle()
             tempArticle=Article(*itr);
             if(itr->isRedirect())
                 redirect=true;
-            mime=itr->getLibraryMimeType();
             ++itr;
             found=true;
             break;
@@ -184,7 +182,6 @@ const zim::writer::Article* zimDiff::ArticleSource::getNextArticle()
             tempArticle=Article(*itr);
             if(itr->isRedirect())
                 redirect=true;
-            mime=itr->getLibraryMimeType();
             ++itr;
             found=true;
             break;
@@ -279,16 +276,6 @@ zim::Blob zimDiff::ArticleSource::getData(const std::string& aid)
     return zim::Blob("",0);
 }
 
-zimDiff::zimDiff(std::string filename_1,std::string filename_2,std::string filename_3,int argc,char *argv[])
-    :
-    c(argc,argv),
-    src(filename_1,filename_2)
-{
-    start_file=filename_1;
-    end_file=filename_2;
-    diff_file=filename_3;
-
-}
 
 }
 
