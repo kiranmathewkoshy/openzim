@@ -189,15 +189,22 @@ private:
         explicit ArticleSource(std::string ,std::string );
         virtual const zim::writer::Article* getNextArticle();
         virtual zim::Blob getData(const std::string& aid);
-    };
-    ArticleSource src;
+    }src;
     zim::writer::ZimCreator c;
     std::string start_file;
     std::string end_file;
     std::string diff_file;
 public:
-    zimDiff(std::string filename_1,std::string filename_2,std::string filename_3,int argc,char *argv[]);
+    zimDiff(std::string filename_1,std::string filename_2,std::string filename_3,int argc,char *argv[])
+:
+    src(filename_1,filename_2),
+    c(argc,argv)
+    {
+        start_file=filename_1;
+        end_file=filename_2;
+        diff_file=filename_3;
 
+    }
     void write()
     {
         c.create(diff_file, src);
