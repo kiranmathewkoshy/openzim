@@ -46,6 +46,7 @@ libzim_la_SOURCES = \
 	uuid.cpp \
 	zimcreator.cpp \
 	zimdiff.cpp \
+	zimpatch.cpp \
 	zintstream.cpp \
 	$(ZLIB_SOURCES) \
 	$(BZIP2_SOURCES) \
