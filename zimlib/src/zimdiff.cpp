@@ -84,14 +84,9 @@ zimDiff::ArticleSource::ArticleSource(std::string filename_1="",std::string file
     startFileUID.Title="startfileuid";
     startFileUID.Url="startfileuid";
     startFileUID.MimeType="text/plain";
-    const char *s=file_1.getFileheader().getUuid().data;
-    std::string st="";
-    for(int i=0; i<16; i++)
-    {
-        st+=toString((int)s[i]);
-        st+="\n";
-    }
-    startFileUID._data=st;
+    std::ostringstream ss;
+    ss<<file_1.getFileheader().getUuid();
+    startFileUID._data=ss.str();
     startFileUID.nm='M';
     startFileUID._id=toString((long long)fileSize+2);
     startFileUID.IsRedirect=false;
@@ -102,14 +97,9 @@ zimDiff::ArticleSource::ArticleSource(std::string filename_1="",std::string file
     endFileUID.Title="endfileuid";
     endFileUID.Url="endfileuid";
     endFileUID.MimeType="text/plain";
-    s=file_2.getFileheader().getUuid().data;
-    st="";
-    for(int i=0; i<16; i++)
-    {
-        st+=toString((int)s[i]);
-        st+="\n";
-    }
-    endFileUID._data=st;
+    std::ostringstream ss1;
+    ss1<<file_2.getFileheader().getUuid();
+    endFileUID._data=ss1.str();
     endFileUID.nm='M';
     endFileUID._id=toString((long long)fileSize+3);
     endFileUID.IsRedirect=false;

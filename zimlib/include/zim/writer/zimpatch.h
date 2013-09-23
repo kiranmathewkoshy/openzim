@@ -130,6 +130,22 @@ private:
         unsigned int indexprev;
         std::vector< int> redirect;
         std::vector< std::pair<std::string , std::string > >redirectList;
+        unsigned char val(char c)
+        {
+            if ('0' <= c && c <= '9') { return c      - '0'; }
+            if ('a' <= c && c <= 'f') { return c + 10 - 'a'; }
+            if ('A' <= c && c <= 'F') { return c + 10 - 'A'; }
+            return '0';
+        }
+        char hexStringtoChar(std::string s)
+        {
+            if(s.size()!=2)
+                return '0';
+            unsigned char num1,num2;
+            num1=val(s[0]);
+            num2=val(s[1]);
+            return num1*16+num2;
+        }
         bool isAdditionalMetadata(std::string url)
         {
             if(url=="M/dlist")
@@ -161,6 +177,7 @@ private:
     std::string start_file;
     std::string end_file;
     std::string diff_file;
+
 public:
     zimPatch(std::string filename_1,std::string filename_2,std::string filename_3,int argc, char* argv[])
         :

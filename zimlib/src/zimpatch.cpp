@@ -44,24 +44,26 @@ namespace zim
             index=0;
             start_file=zim::File(start_filename);
             diff_file=zim::File(diff_filename);
+
+            //Obtain endfileuid and convert it to a UUID object.
             std::string id=diff_file.getArticleByUrl("M/endfileuid").getPage();
-            std::string temp="";
-            unsigned int k=0;
             char tempArray[16];
-            for(unsigned int i=0; i<id.size(); i++)
-            {
-                if(id[i]=='\n')
-                {
-                    tempArray[k]=(char) atoi(temp.c_str());
-                    //std::cout<<"\n"<<temp;
-                    temp="";
-                    k++;
-                }
-                else
-                {
-                    temp+=id[i];
-                }
-            }
+            tempArray[0]=hexStringtoChar(id.substr(0,2));
+            tempArray[1]=hexStringtoChar(id.substr(2,2));
+            tempArray[2]=hexStringtoChar(id.substr(4,2));
+            tempArray[3]=hexStringtoChar(id.substr(6,2));
+            tempArray[4]=hexStringtoChar(id.substr(9,2));
+            tempArray[5]=hexStringtoChar(id.substr(11,2));
+            tempArray[6]=hexStringtoChar(id.substr(14,2));
+            tempArray[7]=hexStringtoChar(id.substr(16,2));
+            tempArray[8]=hexStringtoChar(id.substr(19,2));
+            tempArray[9]=hexStringtoChar(id.substr(21,2));
+            tempArray[10]=hexStringtoChar(id.substr(24,2));
+            tempArray[11]=hexStringtoChar(id.substr(26,2));
+            tempArray[12]=hexStringtoChar(id.substr(28,2));
+            tempArray[13]=hexStringtoChar(id.substr(30,2));
+            tempArray[14]=hexStringtoChar(id.substr(32,2));
+            tempArray[15]=hexStringtoChar(id.substr(34,2));
             fileUid=zim::Uuid(tempArray);
             std::string tempString=diff_file.getArticleByUrl("M/mainaurl").getPage();
             if(diff_file.getArticleByUrl(tempString).getIndex()!=std::numeric_limits<unsigned int>::max())
