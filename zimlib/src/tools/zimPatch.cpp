@@ -84,37 +84,12 @@ bool checkDiffFile(std::string startFileName, std::string diffFileName)
     }
 
     //Check the UID of startFile and the value stored in startfileuid
-    const char *startfileUID1=startFile.getFileheader().getUuid().data;
+    std::string startfileUID1;
     std::string startFileUID2=diffFile.getArticleByUrl(additionalMetadata[1]).getPage();
-    std::string temp="";
-    unsigned int k=0;
-    char tempArray[16];
-    for(unsigned int i=0; i<startFileUID2.size(); i++)
-    {
-        if(startFileUID2[i]=='\n')
-        {
-            tempArray[k]=(char) atoi(temp.c_str());
-            //std::cout<<"\n"<<temp;
-            temp="";
-            k++;
-        }
-        else
-        {
-            temp+=startFileUID2[i];
-        }
-    }
-    startFileUID2=tempArray;
-    //std::cout<<"\nuid 1: "<<startFileUID;
-    //std::cout<<"\nuid 2: "<<tempArray[15];
-    bool compare=true;
-    for(int i=0; i<16; i++)
-    {
-        if(tempArray[i]!=startfileUID1[i])
-            compare=false;
-    }
-    if(!compare)
-        return false;
-    return true;
+    std::ostringstream ss;
+    ss<<startFile.getFileheader().getUuid();
+    startfileUID1=ss.str();
+    return startfileUID1==startFileUID2;
 }
 
 
